@@ -14,4 +14,6 @@ OUTPUT=$(wc -w<<<"$line")
 echo -n  "Line No:$number"-Count of Words:
 echo $OUTPUT
 done < $filename
-awk '{for(i = 1; i <= NF; i++) {a[$i]++}} END {for(k in a) if(a[k] > 1) {print "Word :"k,"- Count of repetition :"a[k]}}' $filename
+#awk '{for(i = 1; i <= NF; i++) {a[$i]++}} END {for(k in a) if(a[k] > 1) {print "Word :"k,"- Count of repetition :"a[k]}}' $filename
+grep -o '[[:alnum:]]'* $filename | sort | uniq -c | sed -E 's/[[:space:]]*([0-9]+)(.+)/word:\2 - Count of repetition: \1/'
+#grep -o '[[:alnum:]]'* $filename | sort | uniq -c | sed -E 's/[[:space:]]*([0-9]+) (.+)/\2 : \1/'
